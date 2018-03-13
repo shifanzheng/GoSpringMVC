@@ -2,7 +2,7 @@
 
 *Project Description*
 
-The web application being developed will be an online multiplayer game based on the ancient Chinese board game called Go, or Wei Qi. This is a popular game played by people all over the world, and matches are played with two players where one player places white stones and the other player places black stones on a 15 by 15 square board.
+The web application being developed will be an online multiplayer game based on the ancient Chinese board game called Go, or Wei Qi. This is a popular game played by people all over the world, and matches are played with two players where one player places white stones and the other player places black stones on a 19 by 19 square board.
 
 *Project Design*
 
