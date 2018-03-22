@@ -8,7 +8,7 @@ The web application being developed will be an online multiplayer game based on 
 
 Technologies Used: Javascript (Front-end), Spring (Back-end), MySQL (Database)
 
-Use Cases: Players will be able to play the Go board game with all all of its rules. A history of moves made by the player will be displayed during the match, and players can view the details of the match after the game is over. Players can challenge other players to matches, and there will be two game modes available, a standard 19 by 19 board and a shorter 9 by 9 board.
+Use Cases: Players will be able to play the Go board game with all all of its rules. A history of moves made by the player will be displayed during the match, and players can view the details of the match after the game is over. Players can challenge other players to matches, and there will be two game modes available, a standard 19 by 19 board and a smaller 9 by 9 board. Each game will be played on a board and it will have two players who are able to place stones on the board. Players will create accounts to play the game. To play games, players will be placed in a lobby after logging in to their account and will then be able to select other players in the lobby to play a game with.
 
 Design docs needed to understand project:
 
