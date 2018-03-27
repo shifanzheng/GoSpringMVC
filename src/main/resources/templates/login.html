@@ -1,17 +1,27 @@
-<!--<html>
-    <title>Login</title>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head> 
+        <title>User Login Screen</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
     <body>
-        <h1>Hello</h1>
+        <h1>Login</h1>
+        <form action="#" th:action="@{/login}" th:object="${userModel}" method="post">
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" th:field="*{username}" /></td>
+                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Invalid Username</td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" th:field="*{password}" /></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid Password</td>
+                </tr>
+            </table>
+            <p><input type="submit" value="Login" /></p>
+        </form>
+        <form action="/account">
+            <input type="submit" value="Create Account" />
+        </form>
     </body>
-</html>-->
-
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>My page<title>
-    <script type="text/javascript" src="wgo/wgo.min.js"></script>
-  </head>
-  <body>
-  WGo.js application is here.
-  </body>
 </html>

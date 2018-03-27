@@ -1,4 +1,7 @@
 /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Application;
 
@@ -19,25 +22,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author Shifan
  */
 @Controller
-public class LoginController implements WebMvcConfigurer {
+public class AccountController implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/board").setViewName("board");
     }
 
-    @GetMapping("/login")
-    public String userLogin(UserModel userModel) {
-        return "login";
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/account")
+    public String creatAccount(Model model) {
+        UserModel u = new UserModel();
+        model.addAttribute("userModel", new UserModel());
+        return "account";
     }
 
-    @PostMapping("/login")
-    public String loginSubmit(@Valid UserModel userModel, BindingResult bindingResult) throws IOException {
+    @PostMapping("/account")
+    public String accountSubmit(@Valid @ModelAttribute UserModel userModel, BindingResult bindingResult) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "account";
         }
-
+        userRepository.save(userModel);
         return "redirect:/board";
     }
 
