@@ -40,4 +40,4 @@ Novelty: Go is a very popular board game people play all over the world but brin
 
 Complexity: Angular, Spring, and MySQL are all technologies I have never worked with previously before this class. There will be a challenge in learning the use of all of these technologies and properly implementing them in a way that makes sense for this project. There will be many challenges in creating the game and making sure it follows all the rules of the actual game, as well as making sure that interactions on the board are dynamic so that players do not have to reload the page each time a move is made. Besides the mechanics involved in the game, I must also properly be able to store and display data of previous matches for players to see in the future, as well as the challenge of creating a matchmaking system so that players can play with each other. There are many tasks in both the front end and back end of the application that require learning for me to accomplish, so this will be a great challenge for me as a final project.
 
-
+Github Page: https://github.com/shifanzheng/GoSpringMVC
