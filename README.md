@@ -22,8 +22,8 @@ https://senseis.xmp.net/?BasicRulesOfGo
 
 *Project Schedule*
 
-*Checkpoint 1: Work on setting up the base for the application such as the back end to hold the data and begin development of the board. By the end of this checkpoint a player should be able to place pieces on a board, capture pieces, and have the other rules of Go applied to the board.
-Completed*
+*Completed
+Checkpoint 1: Work on setting up the base for the application such as the back end to hold the data and begin development of the board. By the end of this checkpoint a player should be able to place pieces on a board, capture pieces, and have the other rules of Go applied to the board.*
 
 For this first checkpoint I am able to serve to the user a functional Go board, with functionality such as placing black and white pieces, capturing territory, passing, and calculating score using an external library. I have began development of a simple account creation and login interface with form validation. For the next checkpoint I will work on two player useability and displaying a history of moves played during the game.
 
