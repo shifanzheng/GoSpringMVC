@@ -1,4 +1,4 @@
-# Proposal
+# Project Plan
 
 *Project Description*
 
@@ -8,7 +8,11 @@ The web application being developed will be an online multiplayer game based on 
 
 Technologies Used: Javascript (Front-end), Spring (Back-end), MySQL (Database)
 
-Use Cases: Players will be able to play the Go board game with all all of its rules. A history of moves made by the player will be displayed during the match, and players can view the details of the match after the game is over. Players can challenge other players to matches, and there will be two game modes available, a standard 19 by 19 board and a smaller 9 by 9 board. Each game will be played on a board and it will have two players who are able to place stones on the board. Players will create accounts to play the game. To play games, players will be placed in a lobby after logging in to their account and will then be able to select other players in the lobby to play a game with.
+Use Cases: Players will be able to play the Go board game with all all of its rules.
+A history of moves made by the player will be displayed during the match. 
+Players can challenge other players to matches, and there will be two game modes available, a standard 19 by 19 board and a smaller 9 by 9 board. 
+Each game will be played on a board and it will have two players who are able to place stones on the board. 
+Players will create accounts to play the game. To play games, players will be placed in a lobby after logging in to their account and will then be able to select other players in the lobby to play a game with.
 
 Design docs needed to understand project:
 
@@ -18,13 +22,17 @@ https://senseis.xmp.net/?BasicRulesOfGo
 
 *Project Schedule*
 
-Checkpoint 1: Work on setting up the base for the application such as the back end to hold the data and begin development of the board. By the end of this checkpoint a player should be able to place pieces on a board, capture pieces, and have the other rules of Go applied to the board.
+*Checkpoint 1: Work on setting up the base for the application such as the back end to hold the data and begin development of the board. By the end of this checkpoint a player should be able to place pieces on a board, capture pieces, and have the other rules of Go applied to the board.
+Completed*
 
-Checkpoint 2: Work on displaying a history of moves during the game and data of the match afterwards. The moves made by both players should be view-able after the game.
+For this first checkpoint I am able to serve to the user a functional Go board, with functionality such as placing black and white pieces, capturing territory, passing, and calculating score using an external library. I have began development of a simple account creation and login interface with form validation. For the next checkpoint I will work on two player useability and displaying a history of moves played during the game.
 
-Checkpoint 3: Create a login screen with account creation and a main menu and displaying previous match data. Work on matchmaking between players and a 9x9 board size mode.
 
-Final Project: The final project will be a web application of the Go board game where players will be able to create an account and challenge other players to matches. Players will be able to view their previous matches’ data. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. 
+Checkpoint 2: Work on displaying a history of moves during the game and implementing Ajax for two players to access the same board and have the board display the same information (position of stones and captured stones) to both players.
+
+Checkpoint 3: Create a login screen with account creation and lobby for matchmaking. Work on matchmaking between players and a 9x9 board size mode.
+
+Final Project: The final project will be a web application of the Go board game where players will be able to create an account and challenge other players to matches. Players will be able to play with other players by accessing the same board in a lobby. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. 
 
 *Project Justification*
 
