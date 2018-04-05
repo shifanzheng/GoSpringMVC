@@ -1,0 +1,6 @@
+Application\UserModel.class
+Application\UserRepository.class
+Application\Application.class
+Application\LoginController.class
+Application\WebConfig.class
+Application\AccountController.class
