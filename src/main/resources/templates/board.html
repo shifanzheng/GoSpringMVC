@@ -1,45 +1,46 @@
-<!--<script type="text/javascript" th:src="@{/files/tenuki.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/files/tenuki.css}"/>-->
-
-<!--<link rel="stylesheet" type="text/css" th:href="@{/files/example.css}"/>
-  <script type="text/javascript" th:src="@{/files/example-controls.js}">-->
-<!DOCTYPE HTML>
-
-
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 
 <head>
-<!--<script type="text/javascript" th:src="@{/files/tenuki.js}"></script>-->
-<script th:src="@{/files/tenuki.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/files/tenuki.css}"/>
+    <script th:src="@{/files/tenuki.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/files/tenuki.css}"/>
 
-<link rel="stylesheet" type="text/css" th:href="@{/files/example.css}"/>
-  <script type="text/javascript" th:src="@{/files/example-controls.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/files/controls.css}"/>
+    <script th:src="@{/files/controls.js}"></script>
 </head>
 
 <div class="tenuki-board" data-include-coordinates=true></div>
 
 <div class="controls">
-  <div class="buttons">
-    <a class="pass" href="#">Pass</a>
-    <a class="undo" href="#">Undo</a>
-  </div>
+    <div class="buttons">
+        <a class="pass" href="#">Pass</a>
 
-  <div class="game-info"><p>&nbsp;</p></div>
-  <div class="text-info"><p></p></div>
-</div>
+        <!--<a class="undo" href="#">Undo</a>-->
+    </div>
 
-<script>
-var boardElement = document.querySelector(".tenuki-board");
-var game = new tenuki.Game({ element: boardElement });
+    <div class="game-info"><p>&nbsp;</p></div>
+    <div class="text-info"><p></p></div>
 
-var controlElement = document.querySelector(".controls");
-var controls = new ExampleGameControls(controlElement, game);
-controls.setup();
 
-game.callbacks.postRender = function(game) {
-  controls.updateStats();
-};
-</script>
+    <script>
+        var boardElement = document.querySelector(".tenuki-board");
+        var game = new tenuki.Game({element: boardElement});
+
+        var controlElement = document.querySelector(".controls");
+        var controls = new GameControls(controlElement, game);
+        controls.setup();
+
+
+        game.callbacks.postRender = function (game) {
+//                var bytesArray = [];
+//                for (var i = 0; i < game.length; i++) {
+//                    var bytes = [];
+//                    for (var j = 0; j < game[i].length; ++j)
+//                        bytes.push(game[i].charCodeAt(j));
+//                    bytesArray.push(bytes);
+//                }
+//            }
+            controls.updateStats();
+        };
+    </script>
