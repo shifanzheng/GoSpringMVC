@@ -3,11 +3,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 
 <head>
-    <script th:src="@{/files/tenuki.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/files/tenuki.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:src="@{/tenuki.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/tenuki.css}"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/files/controls.css}"/>
-    <script th:src="@{/files/controls.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/controls.css}"/>
+    <script th:src="@{/controls.js}"></script>
 </head>
 
 <div class="tenuki-board" data-include-coordinates=true></div>
@@ -16,31 +17,63 @@
     <div class="buttons">
         <a class="pass" href="#">Pass</a>
 
-        <!--<a class="undo" href="#">Undo</a>-->
     </div>
 
     <div class="game-info"><p>&nbsp;</p></div>
     <div class="text-info"><p></p></div>
 
+    <button type="button" onclick="ajaxFunction()">Click me </button>
+
 
     <script>
         var boardElement = document.querySelector(".tenuki-board");
         var game = new tenuki.Game({element: boardElement});
-
         var controlElement = document.querySelector(".controls");
         var controls = new GameControls(controlElement, game);
         controls.setup();
 
 
+        function ajaxFunction() {
+            $.ajax({
+                type: 'GET',
+//                    url: '/board',
+                url: 'data.json',
+//                    data: JSON.stringify(controls),
+                success: function (data) {
+                    alert('updated');
+                    controls = data;
+                    controls.setup();
+                    controls.updateStats();
+                    game.render();
+
+
+                }
+            });
+
+            controls.playAt(4, 4);
+            controls.render();
+        }
+
         game.callbacks.postRender = function (game) {
-//                var bytesArray = [];
-//                for (var i = 0; i < game.length; i++) {
-//                    var bytes = [];
-//                    for (var j = 0; j < game[i].length; ++j)
-//                        bytes.push(game[i].charCodeAt(j));
-//                    bytesArray.push(bytes);
-//                }
-//            }
+
             controls.updateStats();
+
+            $.ajax({
+                type: 'POST',
+                url: '/board',
+                data: JSON.stringify(controls),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: function (data) {
+                    controls = JSON.parse(data);
+                    alert('updated');
+                },
+                error: function () {
+                    alert('error');
+                }
+
+            });
         };
     </script>
