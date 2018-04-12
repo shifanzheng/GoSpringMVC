@@ -27,12 +27,14 @@ Checkpoint 1: Work on setting up the base for the application such as the back e
 
 For this first checkpoint I am able to serve to the user a functional Go board, with functionality such as placing black and white pieces, capturing territory, passing, and calculating score using an external library. I have began development of a simple account creation and login interface with form validation. For the next checkpoint I will work on two player useability and displaying a history of moves played during the game.
 
+*Completed
+Checkpoint 2: Work on displaying a history of moves during the game and implementing Ajax for two players to access the same board and have the board display the same information (position of stones and captured stones) to both players.*
 
-Checkpoint 2: Work on displaying a history of moves during the game and implementing Ajax for two players to access the same board and have the board display the same information (position of stones and captured stones) to both players.
+For the second checkpoint I was able to get almost everything done except for properly rendering the board between two different windows. I made a scrollable list for the user to see a history of moves, and implemented ajax GET and POST functions. Currently the ajax functions are working but I am unable to take the data from the GET request and properly render the board with that data. That will be pushed to the next checkpoint.
 
-Checkpoint 3: Create a login screen with account creation and lobby for matchmaking. Work on matchmaking between players and a 9x9 board size mode.
+Checkpoint 3: Using the data from the Ajax GET request, properly render the board so that from another window the same game board can be displayed. Add a 9x9 game mode and create an option for users to select the regular 19x19 board size or the 9x9 board size.
 
-Final Project: The final project will be a web application of the Go board game where players will be able to create an account and challenge other players to matches. Players will be able to play with other players by accessing the same board in a lobby. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. 
+Final Project: The final project will be a web application of the Go board game where players will be able to create an account and play with other players. Players will be playing on the same board. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. 
 
 *Project Justification*
 
