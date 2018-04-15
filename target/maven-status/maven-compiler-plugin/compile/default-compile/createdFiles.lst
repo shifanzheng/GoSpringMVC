@@ -1,4 +1,5 @@
 Application\UserModel.class
+Application\WebSecurityConfig.class
 Application\WebConfig.class
 Application\AccountController.class
 Application\UserRepository.class

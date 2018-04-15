@@ -41,17 +41,15 @@
 //                    data: JSON.stringify(controls),
                 success: function (data) {
                     alert('updated');
-                    controls = data;
+                    game = data;
+                    controls = new GameControls(controlElement, game);
                     controls.setup();
-                    controls.updateStats();
                     game.render();
 
 
                 }
             });
 
-            controls.playAt(4, 4);
-            controls.render();
         }
 
         game.callbacks.postRender = function (game) {
@@ -61,13 +59,13 @@
             $.ajax({
                 type: 'POST',
                 url: '/board',
-                data: JSON.stringify(controls),
+                data: JSON.stringify(game),
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 success: function (data) {
-                    controls = JSON.parse(data);
+//                    controls = JSON.parse(data);
                     alert('updated');
                 },
                 error: function () {
