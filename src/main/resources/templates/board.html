@@ -52,9 +52,10 @@
                             url: 'data.json',
                             success: function (data) {
                                 jsonData = data;
-                                console.log(jsonData[0]+" "+jsonData[1]);
-//                                game.playAt(jsonData[0],jsonData[1]);
-//                                game.render();
+                                console.log(jsonData[0] + " " + jsonData[1]);
+                                game.playAt(jsonData[0],jsonData[1]);
+//                                game.playAt(1, 1);
+                                game.render();
                             }
                         });
 
@@ -62,14 +63,14 @@
 
                     game.callbacks.postRender = function (game) {
                         controls.updateStats();
-                        var moveY = game.currentState().playedPoint.y.toString();
-                        var moveX = game.currentState().playedPoint.x.toString();
+                        var moveY = game.currentState().playedPoint.y;
+                        var moveX = game.currentState().playedPoint.x;
                         jsonData = [moveY, moveX];
                         $.ajax({
                             type: 'POST',
                             url: '/board',
                             data: JSON.stringify(jsonData),
-                             contentType: "application/json",
+                            contentType: "application/json",
 //                            success: function (data) {
 ////                                alert(''+game.currentState().playedPoint.y.toString()+ ' '+game.currentState().playedPoint.x.toString());
 //                            },

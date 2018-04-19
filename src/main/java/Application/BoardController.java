@@ -33,7 +33,7 @@ public class BoardController {
         ObjectMapper mapper = new ObjectMapper();
         object = mapper.readTree(string);
 
-        File tmpDir = new File("src/main/resources/static/data.json");
+        File tmpDir = new File("target/classes/static/data.json");
         String tempString = "";
         Scanner sc;
 
