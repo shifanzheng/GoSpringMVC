@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Application;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,18 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(path = "/board")
 public class BoardController {
 
-//    @GetMapping
-//    public Game getResource() {
-//        Game gm = new Game();
-//        return gm;
-//    }
-//
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public Game postGame(@RequestBody Game game) {
-//
-//        Game gm = new Game();
-//        return gm;
-//    }
     @GetMapping
     public String getRequest() {
         return "board";

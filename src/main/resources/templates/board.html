@@ -1,77 +1,82 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script th:src="@{/tenuki.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/tenuki.css}"/>
+            <head>
+                <meta name="_csrf" th:content="${_csrf.token}"/>
+                <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/controls.css}"/>
-    <script th:src="@{/controls.js}"></script>
-</head>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script th:src="@{/tenuki.js}"></script>
+                <link rel="stylesheet" type="text/css" th:href="@{/tenuki.css}"/>
 
-<div class="tenuki-board" data-include-coordinates=true></div>
+                <link rel="stylesheet" type="text/css" th:href="@{/controls.css}"/>
+                <script th:src="@{/controls.js}"></script>
+            </head>
 
-<div class="controls">
-    <div class="buttons">
-        <a class="pass" href="#">Pass</a>
+            <div class="tenuki-board" data-include-coordinates=true></div>
 
-    </div>
+            <div class="controls">
+                <div class="buttons">
+                    <a class="pass" href="#">Pass</a>
 
-    <div class="game-info"><p>&nbsp;</p></div>
-    <div class="text-info"><p></p></div>
+                </div>
 
-    <button type="button" onclick="ajaxFunction()">Click me </button>
+                <div class="game-info"><p>&nbsp;</p></div>
+                <div class="text-info"><p></p></div>
 
+                <button type="button" onclick="ajaxFunction()">Click me </button>
 
-    <script>
-        var boardElement = document.querySelector(".tenuki-board");
-        var game = new tenuki.Game({element: boardElement});
-        var controlElement = document.querySelector(".controls");
-        var controls = new GameControls(controlElement, game);
-        controls.setup();
-
-
-        function ajaxFunction() {
-            $.ajax({
-                type: 'GET',
-//                    url: '/board',
-                url: 'data.json',
-//                    data: JSON.stringify(controls),
-                success: function (data) {
-                    alert('updated');
-                    game = data;
-                    controls = new GameControls(controlElement, game);
+                </html>
+                <script>
+                    var boardElement = document.querySelector(".tenuki-board");
+                    var game = new tenuki.Game({element: boardElement});
+                    var controlElement = document.querySelector(".controls");
+                    var controls = new GameControls(controlElement, game);
                     controls.setup();
-                    game.render();
+
+                    var token = $("meta[name='_csrf']").attr("content");
+                    var header = $("meta[name='_csrf_header']").attr("content");
+                    var jsonData = [];
 
 
-                }
-            });
+                    $(document).ajaxSend(function (e, xhr, options) {
+                        xhr.setRequestHeader(header, token);
+                    });
 
-        }
+                    function ajaxFunction() {
+                        $.ajax({
+                            type: 'GET',
+                            url: 'data.json',
+                            success: function (data) {
+                                jsonData = data;
+                                console.log(jsonData[0]+" "+jsonData[1]);
+//                                game.playAt(jsonData[0],jsonData[1]);
+//                                game.render();
+                            }
+                        });
 
-        game.callbacks.postRender = function (game) {
+                    }
 
-            controls.updateStats();
+                    game.callbacks.postRender = function (game) {
+                        controls.updateStats();
+                        var moveY = game.currentState().playedPoint.y.toString();
+                        var moveX = game.currentState().playedPoint.x.toString();
+                        jsonData = [moveY, moveX];
+                        $.ajax({
+                            type: 'POST',
+                            url: '/board',
+                            data: JSON.stringify(jsonData),
+                             contentType: "application/json",
+//                            success: function (data) {
+////                                alert(''+game.currentState().playedPoint.y.toString()+ ' '+game.currentState().playedPoint.x.toString());
+//                            },
+                            error: function () {
+                                alert('error');
+                            }
 
-            $.ajax({
-                type: 'POST',
-                url: '/board',
-                data: JSON.stringify(game),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                success: function (data) {
-//                    controls = JSON.parse(data);
-                    alert('updated');
-                },
-                error: function () {
-                    alert('error');
-                }
-
-            });
-        };
-    </script>
+                        });
+                    };
+                </script>
