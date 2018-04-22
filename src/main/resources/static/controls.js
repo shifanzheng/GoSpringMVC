@@ -10,7 +10,6 @@ GameControls = function (element, game) {
 
     var moveArray = [];
 
-
     this.updateStats = function () {
 
         var newGameInfo = "";
@@ -27,7 +26,9 @@ GameControls = function (element, game) {
 
             newGameInfo += " (" + moveCoordinate + ")";
 
-            moveArray.push(playerColor + " played at " + moveCoordinate);
+            var moveListText = playerColor + " played at " + moveCoordinate;
+            if (moveArray[moveArray.length - 1] !== moveListText)
+                moveArray.push(moveListText);
             newGameInfo += "\n\n";
             newGameInfo += "Move List" + "\n";
             var i;
@@ -68,18 +69,11 @@ GameControls = function (element, game) {
         var controls = this;
 
         var passButton = document.querySelector(".pass");
-//        var undoButton = document.querySelector(".undo");
 
         passButton.addEventListener("click", function (e) {
             e.preventDefault();
 
             controls.game.pass();
         });
-
-//        undoButton.addEventListener("click", function (e) {
-//            e.preventDefault();
-//
-//            controls.game.undo();
-//        });
     }
 };
