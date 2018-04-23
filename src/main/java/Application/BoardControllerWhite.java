@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Shifan
  */
 @Controller
-@RequestMapping(path = "/board")
-public class BoardController {
+@RequestMapping(path = "/boardBlack")
+public class BoardControllerWhite {
 
     @GetMapping
     public String getRequest() {
-        return "board";
+        return "boardBlack";
     }
 
     @ResponseBody
@@ -33,7 +33,7 @@ public class BoardController {
         ObjectMapper mapper = new ObjectMapper();
         object = mapper.readTree(string);
 
-        File tmpDir = new File("target/classes/static/data.json");
+        File tmpDir = new File("target/classes/static/dataBlack.json");
         String tempString = "";
         Scanner sc;
 

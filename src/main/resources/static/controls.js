@@ -74,6 +74,7 @@ GameControls = function (element, game) {
             e.preventDefault();
 
             controls.game.pass();
+            moveArray.push
         });
     }
 };

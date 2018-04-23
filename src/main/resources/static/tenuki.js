@@ -1016,8 +1016,7 @@ Game.prototype = {
 
         hoverValue: function hoverValue(y, x) {
           if (!_this.isOver() && !_this.isIllegalAt(y, x)) {
-//            return _this.currentPlayer();
-              return "black";
+            return _this.currentPlayer();
           }
         },
 
@@ -1083,17 +1082,16 @@ Game.prototype = {
     return this.currentState().moveNumber;
   },
 
-  playAt: function playAt(y, x) {
+  playAt: function playAt(y, x, myTurn) {
     var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
         _ref2$render = _ref2.render,
         render = _ref2$render === undefined ? true : _ref2$render;
 
-    if (this.isIllegalAt(y, x)) {
+    if (this.isIllegalAt(y, x) ||  !myTurn) {
       return false;
     }
-
-//    var newState = this.currentState().playAt(y, x, this.currentPlayer());
-    let newState = this.currentState().playAt(y, x, "black");
+    
+    var newState = this.currentState().playAt(y, x, this.currentPlayer());
     var _newState = newState,
         koPoint = _newState.koPoint;
 
