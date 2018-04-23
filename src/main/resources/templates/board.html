@@ -27,8 +27,6 @@
                 <div class="game-info"><p>&nbsp;</p></div>
                 <div class="text-info"><p></p></div>
 
-                <button type="button" onclick="ajaxFunction()">Click me </button>
-
                 </html>
                 <script>
                     var boardElement = document.querySelector(".tenuki-board");
@@ -40,13 +38,20 @@
                     var token = $("meta[name='_csrf']").attr("content");
                     var header = $("meta[name='_csrf_header']").attr("content");
                     var jsonData = [];
+                    
+                    $.ajax({
+                            type: 'POST',
+                            url: '/board',
+                            data: JSON.stringify(jsonData),
+                            contentType: "application/json",
+                        });
+
+                        $(document).ajaxSend(function (e, xhr, options) {
+                            xhr.setRequestHeader(header, token);
+                        });
 
 
-                    $(document).ajaxSend(function (e, xhr, options) {
-                        xhr.setRequestHeader(header, token);
-                    });
-
-                    setInterval(function ajaxFunction() {
+                    setInterval(function ajaxGET() {
                         $.ajax({
                             type: 'GET',
                             url: 'data.json',
@@ -56,11 +61,12 @@
                                 game.render();
                             }
                         });
+                    }, 1000);
 
-                    }, 3000);
 
                     game.callbacks.postRender = function (game) {
                         controls.updateStats();
+
                         var moveY = game.currentState().playedPoint.y;
                         var moveX = game.currentState().playedPoint.x;
                         jsonData = [moveY, moveX];
@@ -69,13 +75,11 @@
                             url: '/board',
                             data: JSON.stringify(jsonData),
                             contentType: "application/json",
-//                            success: function (data) {
-////                                alert(''+game.currentState().playedPoint.y.toString()+ ' '+game.currentState().playedPoint.x.toString());
-//                            },
-                            error: function () {
-//                                alert('error');
-                            }
-
                         });
+
+                        $(document).ajaxSend(function (e, xhr, options) {
+                            xhr.setRequestHeader(header, token);
+                        });
+
                     };
                 </script>

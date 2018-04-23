@@ -1,9 +1,0 @@
-Application\UserModel.class
-Application\WebSecurityConfig.class
-Application\WebConfig.class
-Application\AccountController.class
-Application\UserRepository.class
-Application\Application.class
-Application\LoginController.class
-Application\Game.class
-Application\BoardController.class

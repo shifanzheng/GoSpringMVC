@@ -1016,7 +1016,8 @@ Game.prototype = {
 
         hoverValue: function hoverValue(y, x) {
           if (!_this.isOver() && !_this.isIllegalAt(y, x)) {
-            return _this.currentPlayer();
+//            return _this.currentPlayer();
+              return "black";
           }
         },
 
@@ -1091,7 +1092,8 @@ Game.prototype = {
       return false;
     }
 
-    var newState = this.currentState().playAt(y, x, this.currentPlayer());
+//    var newState = this.currentState().playAt(y, x, this.currentPlayer());
+    let newState = this.currentState().playAt(y, x, "black");
     var _newState = newState,
         koPoint = _newState.koPoint;
 
