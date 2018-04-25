@@ -55,6 +55,7 @@ var _zobrist = require("./zobrist");
 
 var _zobrist2 = _interopRequireDefault(_zobrist);
 
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
@@ -895,9 +896,9 @@ var Game = function Game() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   this._validateOptions(options);
-
   this._defaultBoardSize = 19;
   this.boardSize = null;
+  this.myTurn = true;
   this._moves = [];
   this.callbacks = {
     postRender: function postRender() {}
@@ -935,6 +936,8 @@ Game.prototype = {
         komi = _ref$komi === undefined ? 0 : _ref$komi,
         _ref$handicapStones = _ref.handicapStones,
         handicapStones = _ref$handicapStones === undefined ? 0 : _ref$handicapStones,
+        _ref$myTurn = _ref.myTurn,
+        myTurn = _ref$myTurn === undefined ? true : _ref$myTurn,
         _ref$freeHandicapPlac = _ref.freeHandicapPlacement,
         freeHandicapPlacement = _ref$freeHandicapPlac === undefined ? false : _ref$freeHandicapPlac,
         _ref$scoring = _ref.scoring,
@@ -967,7 +970,7 @@ Game.prototype = {
     this.boardSize = boardSize;
     this.handicapStones = handicapStones;
     this._freeHandicapPlacement = freeHandicapPlacement;
-
+    this.myTurn = myTurn;
     this._scorer = new _scorer2.default({
       scoreBy: scoring,
       komi: komi
@@ -1008,13 +1011,15 @@ Game.prototype = {
     if (this._boardElement) {
       var defaultRendererHooks = {
         handleClick: function handleClick(y, x) {
-//        if(myTurn){
+            console.log(_this.myTurn);
+        if(_this.myTurn){
           if (_this.isOver()) {
             _this.toggleDeadAt(y, x);
           } else {
+              //make myTurn false
             _this.playAt(y, x);
           }
-//      }
+      }
         },
 
         hoverValue: function hoverValue(y, x) {

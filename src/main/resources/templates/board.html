@@ -27,8 +27,6 @@
                 <div class="game-info"><p>&nbsp;</p></div>
                 <div class="text-info"><p></p></div>
 
-                <button type="button" onclick="ajaxFunction()">Click me </button>
-
                 </html>
                 <script>
                     var boardElement = document.querySelector(".tenuki-board");
@@ -40,10 +38,9 @@
                     var token = $("meta[name='_csrf']").attr("content");
                     var header = $("meta[name='_csrf_header']").attr("content");
 
-                    
                     var jsonData = [];
-                    
-                    
+                    var firstTurn = true;
+                    game.myTurn = true;
 
                     $(document).ajaxSend(function (e, xhr, options) {
                         xhr.setRequestHeader(header, token);
@@ -53,16 +50,19 @@
                             type: 'GET',
                             url: 'data.json',
                             success: function (data) {
+                                
+                                firstTurn = false;
                                 jsonData = data;
-//                                game.playAt(jsonData[0], jsonData[1]);
-//                                game.render();
+                                game.playAt(jsonData[0], jsonData[1]);
                             }
                         });
                     }, 1000);
 
                     game.callbacks.postRender = function (game) {
                         
-//                        game.myTurn= !game.myTurn;
+                        if (firstTurn)
+                            game.myTurn = !game.myTurn;
+                        game.myTurn  = !game.myTurn;
                         controls.updateStats();
                         var moveY = game.currentState().playedPoint.y;
                         var moveX = game.currentState().playedPoint.x;
