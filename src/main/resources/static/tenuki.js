@@ -909,6 +909,7 @@ var Game = function Game() {
   this._deadPoints = [];
 
   this._setup(options);
+  
 };
 
 Game.prototype = {
@@ -1003,15 +1004,17 @@ Game.prototype = {
 
     this._validateOptions(options);
     this._configureOptions(options);
-
+            
     if (this._boardElement) {
       var defaultRendererHooks = {
         handleClick: function handleClick(y, x) {
+//        if(myTurn){
           if (_this.isOver()) {
             _this.toggleDeadAt(y, x);
           } else {
             _this.playAt(y, x);
           }
+//      }
         },
 
         hoverValue: function hoverValue(y, x) {
@@ -1082,12 +1085,12 @@ Game.prototype = {
     return this.currentState().moveNumber;
   },
 
-  playAt: function playAt(y, x, myTurn) {
+  playAt: function playAt(y, x) {
     var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
         _ref2$render = _ref2.render,
         render = _ref2$render === undefined ? true : _ref2$render;
 
-    if (this.isIllegalAt(y, x) ||  !myTurn) {
+    if (this.isIllegalAt(y, x)) {
       return false;
     }
     
