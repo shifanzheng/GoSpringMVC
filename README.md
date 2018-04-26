@@ -6,7 +6,7 @@ The web application being developed will be an online multiplayer game based on 
 
 *Project Design*
 
-Technologies Used: Javascript (Front-end), Spring (Back-end), MySQL (Database)
+Technologies Used: Javascript (Front-end), Spring (Back-end) and Spring Security, MySQL (Database)
 
 Use Cases: Players will be able to play the Go board game with all all of its rules.
 A history of moves made by the player will be displayed during the match. 
@@ -32,7 +32,10 @@ Checkpoint 2: Work on displaying a history of moves during the game and implemen
 
 For the second checkpoint I was able to get almost everything done except for properly rendering the board between two different windows. I made a scrollable list for the user to see a history of moves, and implemented ajax GET and POST functions. Currently the ajax functions are working but I am unable to take the data from the GET request and properly render the board with that data. That will be pushed to the next checkpoint.
 
-Checkpoint 3: Using the data from the Ajax GET request, properly render the board so that from another window the same game board can be displayed. Add a 9x9 game mode and create an option for users to select the regular 19x19 board size or the 9x9 board size.
+*Completed
+Checkpoint 3: Using the data from the Ajax GET request, properly render the board so that from another window the same game board can be displayed. Add a 9x9 game mode and create an option for users to select the regular 19x19 board size or the 9x9 board size.*
+
+For checkpoint 3 I now have a fully functional game that can be played between two people. Spring security is implemented for sign-in, and a separate 9x9 board can be accessed with /board9. Players will select a color before placing pieces on the board. Players are no longer able to place pieces when it is not their turn. 
 
 Final Project: The final project will be a web application of the Go board game where players will be able to create an account and play with other players. Players will be playing on the same board. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. 
 
