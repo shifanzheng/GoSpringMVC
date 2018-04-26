@@ -77,7 +77,7 @@
                                     jsonData = [color, false];
                                     $.ajax({
                                         type: 'POST',
-                                        url: '/board',
+                                        url: '/board9',
                                         data: JSON.stringify(jsonData),
                                         contentType: "application/json",
                                     });
@@ -106,7 +106,7 @@
                             jsonData = [moveY, moveX];
                             $.ajax({
                                 type: 'POST',
-                                url: '/board',
+                                url: '/board9',
                                 data: JSON.stringify(jsonData),
                                 contentType: "application/json",
                             });
@@ -115,7 +115,7 @@
                             jsonData = [color, passStatus];
                             $.ajax({
                                 type: 'POST',
-                                url: '/board',
+                                url: '/board9',
                                 data: JSON.stringify(jsonData),
                                 contentType: "application/json",
                             });
