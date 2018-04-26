@@ -16,10 +16,10 @@
                 <script th:src="@{/controls.js}"></script>
             </head>
 
-            <div class="tenuki-board" data-include-coordinates=true></div>
+            <div id="board" class="tenuki-board" data-include-coordinates=true></div>
 
-            <button id="black" onclick="playBlack()">Play as Black</button>
-            <button id="white" onclick="playWhite()">Play as White</button>
+            <button id="black" onclick="playAsColor(true)">Play as Black</button>
+            <button id="white" onclick="playAsColor(false)">Play as White</button>
             <p id="playerColor"</p>
 
             <div class="controls">
@@ -47,20 +47,22 @@
 
                     var passStatus = controls.checkPass();
 
-                    function playBlack() {
-                        document.getElementById("playerColor").innerHTML = "  Playing as Black";
-                        document.getElementById("black").style.display = 'none';
+                    document.getElementById("board").style.visibility = "hidden";
+                    
+                    function playAsColor(choice) {
+                        document.getElementById("black").style.display = "none";
                         document.getElementById("white").style.display = "none";
-                        color = "black";
-                        game.myTurn = true;
-                    }
+                        document.getElementById("board").style.visibility = "visible";
 
-                    function playWhite() {
-                        document.getElementById("playerColor").innerHTML = "  Playing as White";
-                        document.getElementById("black").style.display = 'none';
-                        document.getElementById("white").style.display = "none";
-                        color = "white";
-                        game.myTurn = false;
+                        if (choice) {
+                            color = "black";
+                            game.myTurn = true;
+                            document.getElementById("playerColor").innerHTML = "  Playing as Black";
+                        } else {
+                            color = "white";
+                            game.myTurn = false;
+                            document.getElementById("playerColor").innerHTML = "  Playing as White";
+                        }
                     }
 
                     $(document).ajaxSend(function (e, xhr, options) {
