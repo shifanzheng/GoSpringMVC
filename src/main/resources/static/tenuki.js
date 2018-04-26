@@ -1011,12 +1011,10 @@ Game.prototype = {
     if (this._boardElement) {
       var defaultRendererHooks = {
         handleClick: function handleClick(y, x) {
-            console.log(_this.myTurn);
         if(_this.myTurn){
           if (_this.isOver()) {
             _this.toggleDeadAt(y, x);
           } else {
-              //make myTurn false
             _this.playAt(y, x);
           }
       }
@@ -1131,7 +1129,6 @@ Game.prototype = {
     if (render) {
       this.render();
     }
-
     return true;
   },
 

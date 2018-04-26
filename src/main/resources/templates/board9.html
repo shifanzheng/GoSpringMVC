@@ -18,6 +18,10 @@
 
             <div class="tenuki-board" data-include-coordinates=true></div>
 
+            <button id="black" onclick="playBlack()">Play as Black</button>
+            <button id="white" onclick="playWhite()">Play as White</button>
+            <p id="playerColor"</p>
+
             <div class="controls">
                 <div class="buttons">
                     <a class="pass" href="#">Pass</a>
@@ -37,49 +41,84 @@
 
                     var token = $("meta[name='_csrf']").attr("content");
                     var header = $("meta[name='_csrf_header']").attr("content");
+
                     var jsonData = [];
-                    
-                    $.ajax({
-                            type: 'POST',
-                            url: '/board9',
-                            data: JSON.stringify(jsonData),
-                            contentType: "application/json",
-                        });
+                    var color;
 
-                        $(document).ajaxSend(function (e, xhr, options) {
-                            xhr.setRequestHeader(header, token);
-                        });
+                    var passStatus = controls.checkPass();
 
+                    function playBlack() {
+                        document.getElementById("playerColor").innerHTML = "  Playing as Black";
+                        document.getElementById("black").style.display = 'none';
+                        document.getElementById("white").style.display = "none";
+                        color = "black";
+                        game.myTurn = true;
+                    }
 
-                    setInterval(function ajaxGET() {
+                    function playWhite() {
+                        document.getElementById("playerColor").innerHTML = "  Playing as White";
+                        document.getElementById("black").style.display = 'none';
+                        document.getElementById("white").style.display = "none";
+                        color = "white";
+                        game.myTurn = false;
+                    }
+
+                    $(document).ajaxSend(function (e, xhr, options) {
+                        xhr.setRequestHeader(header, token);
+                    });
+                    setInterval(function ajaxFunction() {
                         $.ajax({
                             type: 'GET',
                             url: 'data9.json',
                             success: function (data) {
                                 jsonData = data;
-                                game.playAt(jsonData[0], jsonData[1]);
-                                game.render();
+                                if (jsonData[0] !== color && jsonData[1] === true) {
+                                    game.pass({render: false});
+                                    jsonData = [color, false];
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/board',
+                                        data: JSON.stringify(jsonData),
+                                        contentType: "application/json",
+                                    });
+                                    controls.updateStats();
+                                    game.myTurn = true;
+                                }
+                                if
+                                        (game.playAt(jsonData[0], jsonData[1])) {
+                                    game.myTurn = true;
+                                }
                             }
                         });
                     }, 1000);
 
-
                     game.callbacks.postRender = function (game) {
+                        game.myTurn = !game.myTurn;
+
+                        var moveY;
+                        var moveX;
                         controls.updateStats();
+                        passStatus = controls.checkPass();
 
-                        var moveY = game.currentState().playedPoint.y;
-                        var moveX = game.currentState().playedPoint.x;
-                        jsonData = [moveY, moveX];
-                        $.ajax({
-                            type: 'POST',
-                            url: '/board9',
-                            data: JSON.stringify(jsonData),
-                            contentType: "application/json",
-                        });
-
-                        $(document).ajaxSend(function (e, xhr, options) {
-                            xhr.setRequestHeader(header, token);
-                        });
-
+                        if (passStatus === false) {
+                            moveY = game.currentState().playedPoint.y;
+                            moveX = game.currentState().playedPoint.x;
+                            jsonData = [moveY, moveX];
+                            $.ajax({
+                                type: 'POST',
+                                url: '/board',
+                                data: JSON.stringify(jsonData),
+                                contentType: "application/json",
+                            });
+                        }
+                        if (passStatus === true) {
+                            jsonData = [color, passStatus];
+                            $.ajax({
+                                type: 'POST',
+                                url: '/board',
+                                data: JSON.stringify(jsonData),
+                                contentType: "application/json",
+                            });
+                        }
                     };
                 </script>

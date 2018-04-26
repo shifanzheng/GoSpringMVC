@@ -10,6 +10,8 @@ GameControls = function (element, game) {
 
     var moveArray = [];
 
+    var passStatus = false;
+    
     this.updateStats = function () {
 
         var newGameInfo = "";
@@ -26,8 +28,10 @@ GameControls = function (element, game) {
 
             newGameInfo += " (" + moveCoordinate + ")";
 
+            passStatus = false;
+
             var moveListText = playerColor + " played at " + moveCoordinate;
-            if (moveArray[moveArray.length - 1] !== moveListText)
+            if (contains(moveArray, moveListText))
                 moveArray.push(moveListText);
             newGameInfo += "\n\n";
             newGameInfo += "Move List" + "\n";
@@ -44,7 +48,10 @@ GameControls = function (element, game) {
         if (currentState.pass) {
             var player = currentState.color[0].toUpperCase() + currentState.color.substr(1);
             newGameInfo += player + " passed."
+            moveArray.push(player + " passed");
         }
+
+
 
         this.gameInfo.innerText = newGameInfo;
 
@@ -65,6 +72,24 @@ GameControls = function (element, game) {
         }
     };
 
+    function contains(a, obj) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] === obj) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    this.checkPass = function () {
+        return passStatus;
+    }
+    
+    this.changePassStatus = function (x){
+        passStatus = x;
+    }
+    
+
     this.setup = function () {
         var controls = this;
 
@@ -72,9 +97,11 @@ GameControls = function (element, game) {
 
         passButton.addEventListener("click", function (e) {
             e.preventDefault();
-
+            passStatus = true;
             controls.game.pass();
-            moveArray.push
+            passStatus = false;
+
         });
     }
+
 };
