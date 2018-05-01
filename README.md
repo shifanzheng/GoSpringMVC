@@ -37,7 +37,7 @@ Checkpoint 3: Using the data from the Ajax GET request, properly render the boar
 
 For checkpoint 3 I now have a fully functional game that can be played between two people. Spring security is implemented for sign-in, and a separate 9x9 board can be accessed with /board9. Players will select a color before placing pieces on the board. Players are no longer able to place pieces when it is not their turn. 
 
-Final Project: The final project will be a web application of the Go board game where players will be able to log in using an account and play with other players. Players will be playing on the same board. There will be two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. Completed games are saved to a database where previous game data can be viewed in a results page.
+Final Project: The final project is a web application of the Go board game where players will be able to log in using an account and play with other players. Players will be playing on the same board. There are two modes that players can play, one with a normal game with a 19 by 19 board, and one with a 9 by 9 board for faster games. Completed games are saved to a database where previous game data can be viewed in a results page.
 
 *Project Justification*
 
