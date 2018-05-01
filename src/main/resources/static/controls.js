@@ -11,7 +11,11 @@ GameControls = function (element, game) {
     var moveArray = [];
 
     var passStatus = false;
+
+    var overStatus = false;
     
+    var gameResults;
+
     this.updateStats = function () {
 
         var newGameInfo = "";
@@ -59,11 +63,14 @@ GameControls = function (element, game) {
             var str = "";
 
             if (this.game.isOver()) {
+                overStatus = true;
                 str += "Game over.";
                 str += "\n\n"
                 str += "Black's score is " + this.game.score().black;
                 str += "\n\n";
                 str += "White's score is " + this.game.score().white;
+                
+                gameResults = newGameInfo + "\n\n" + str;
             }
 
             this.setText(str)
@@ -84,11 +91,19 @@ GameControls = function (element, game) {
     this.checkPass = function () {
         return passStatus;
     }
-    
-    this.changePassStatus = function (x){
-        passStatus = x;
+
+    this.checkOver = function () {
+        return overStatus;
     }
     
+    this.getResults =function (){
+        return gameResults;
+    }
+
+    this.changePassStatus = function (x) {
+        passStatus = x;
+    }
+
 
     this.setup = function () {
         var controls = this;
